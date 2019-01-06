@@ -1,0 +1,267 @@
+body {
+    background: #0d9ed1 url(./img/bg.png);
+    font-style: italic;
+    font-family: Georgia, serif;
+    color: #f2f2f2;
+    -webkit-font-smoothing: antialiased;
+    height: 400px;
+}
+
+a {
+    color: #e4e4e4;
+}
+
+.wrapper {
+    text-align: center;
+    padding: 60px 0 0 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+small {
+    font-size: 32px;
+    font-weight: normal;
+    position: relative;
+    top: -20px;
+}
+
+.title {
+    text-shadow: 1px 1px 5px black;
+}
+
+.afterthat {
+    text-shadow: 1px 1px 5px black;
+    font-size: 25px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.forecast-container {
+    position: absolute;
+    height: 200px;
+    top: 450px;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: 11;
+}
+
+.is-mobile .forecast-container {
+    top: 320px;
+}
+
+ul.forecast {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 500px;
+}
+
+ul.forecast li {
+    width: 19.8%;
+    float: left;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: 0.2%;
+    cursor: pointer;
+}
+
+.is-mobile ul.forecast li {
+    width: 20%;
+    margin-right: 0;
+    font-size: 11px;
+}
+
+ul.forecast li:last-child {
+    margin-right: 0;
+}
+
+ul.forecast li .forecast-day,
+ul.forecast li .forecast-temp {
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+ul.forecast li .forecast-temp {
+    font-weight: bold;
+}
+
+ul.forecast li img {
+    height: 30px;
+    margin-bottom: 3px;
+}
+
+#warmte {
+    min-height: 100px;
+    position: relative;
+    top: 95px;
+    margin-bottom: 110px;
+    font-size: 80px;
+    font-weight: bold;
+    display: block;
+    text-shadow: 1px 1px 5px black;
+}
+
+#degree {
+    color: #000;
+    margin: -72px 0 0 0;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    width: 400px;
+    margin-left: -200px;
+    padding: 0 0 10px 0;
+    text-align: center;
+    font-size: 11px;
+}
+
+.downloads {
+    margin-bottom: 15px;
+    display: none;
+}
+
+#android {
+    display: none;
+}
+
+.more-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.more-info {
+    height: 120px;
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    left: 0;
+    top: 150%;
+}
+
+.more-info .left {
+    height: 100%;
+    width: 1%;
+    background-color: rgba(13, 158, 209, 0.8);
+    left: 29%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.more-info .left img {
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+    height: 48px;
+}
+
+.more-info .right {
+    height: 100%;
+    width: 1%;
+    background-color: rgba(0, 0, 0, 0.8);
+    right: 69%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.more-info .right p.text {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    left: 30px;
+    top: 30px;
+    display: block;
+    width: 400px;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        padding: 20px 5px 0 5px;
+        min-height: 400px;
+    }
+
+    .title {
+        margin: 0;
+        padding: 20px 0 0 0;
+        font-size: 21px;
+    }
+
+    #warmte {
+        margin: 0;
+        padding: 0;
+        top: 55px;
+        font-size: 50px;
+    }
+
+    #icon {
+        margin: 100px 0 0 0;
+    }
+
+    .bottom {
+        font-size: 11px;
+        position: fixed;
+        bottom: 5px;
+        left: 50%;
+        width: 320px;
+        margin-left: -160px;
+    }
+
+    .social {
+        display: none;
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    /* iPhone retina afbeeldingen */
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper {
+        padding: 0;
+    }
+
+    .title {
+        font-size: 21px;
+    }
+
+    .bottom {
+    }
+
+    .more-info .right p.text {
+        width: 98%;
+        top: 6px;
+        left: 3px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-device-width: 1024px) and (orientation: portrait) {
+    /* For portrait layouts only */
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
+    .wrapper {
+        padding: 0;
+    }
+
+    #warmte {
+        top: 40px;
+        font-size: 50px;
+    }
+}
