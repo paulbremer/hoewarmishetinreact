@@ -12,7 +12,17 @@ class App extends Component {
 
     componentDidMount() {
         const locationSuccess = (position) => {
-            console.log('locationSuccess', position);
+            console.log('locationSuccess', position.coords);
+
+            axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=b6907d289e10d714a6e88b30761fae22`)
+                .then(res => {
+                    const weather = res.data;
+                    const temp = res.data.main.temp;
+                    this.setState(weather);
+                    addWeather(temp);
+
+                    console.log(weather);
+                });
         }
 
         const locationError = (error) => {
@@ -41,23 +51,13 @@ class App extends Component {
             }
         }
 
-        axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=52.3626686&lon=4.9158238&appid=b6907d289e10d714a6e88b30761fae22`)
-            .then(res => {
-                const weather = res.data;
-                const temp = res.data.main.temp;
-                this.setState(weather);
 
-                console.log(res.data);
-                console.log(res.data.main.temp);
-                // console.log(res.data.coords.latitude);
-                // console.log(res.data.coords.longitude);
-                addWeather(temp);
-            });
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
         } else {
             console.error('Je browser kan de zon niet zien!');
+            this.setState({ tempText: 'wij zijn de zon kwijt' });
         }
     }
 
