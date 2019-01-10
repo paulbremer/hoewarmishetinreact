@@ -11,6 +11,21 @@ a {
     color: #e4e4e4;
 }
 
+.background {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    background-size: cover;
+}
+
+header {
+    z-index: 1;
+    position: relative;
+}
+
 .wrapper {
     text-align: center;
     padding: 60px 0 0 0;

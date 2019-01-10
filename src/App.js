@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Flickr from 'flickr-sdk';
 import './App.css';
 
 class App extends Component {
@@ -7,26 +8,27 @@ class App extends Component {
         main: {
             temp: 0
         },
-        tempText: 'Op zoek naar de zon...'
+        tempText: 'Op zoek naar de zon...',
+        backgroundImageURI: '',
     }
 
     componentDidMount() {
-        const locationSuccess = (position) => {
-            console.log('locationSuccess', position.coords);
+        const flickrApiKey = '4b82a5422b18968ea142a50cd9941398';
+        const flickr =  Flickr(flickrApiKey);
 
+        const locationSuccess = (position) => {
             axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=b6907d289e10d714a6e88b30761fae22`)
                 .then(res => {
                     const weather = res.data;
                     const temp = res.data.main.temp;
                     this.setState(weather);
                     addWeather(temp);
-
-                    console.log(weather);
+                    addBackgroundPhoto(weather);
                 });
         }
 
         const locationError = (error) => {
-            console.log('locationError', error);
+            console.error('STUK locationError', error);
         }
 
         const addWeather = (temp) => {
@@ -51,7 +53,24 @@ class App extends Component {
             }
         }
 
+        const addBackgroundPhoto = (weather) => {
+            flickr.photos.search({
+                text: `${weather.name} ${weather.weather.main}`
+            }).then((res) => {
+                const randomNumber = Math.floor(Math.random() * (res.body.photos.photo.length));
+                const firstPhotoId = res.body.photos.photo[randomNumber].id;
 
+                flickr.photos.getSizes({
+                    photo_id: firstPhotoId
+                }).then((result) => {
+                    this.setState({ backgroundImageURI: result.body.sizes.size[result.body.sizes.size.length - 2].source });
+                }).catch((err) => {
+                    console.error('STUK', err);
+                });
+            }).catch((err) => {
+                console.error('STUK', err);
+            });
+        }
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
@@ -64,6 +83,7 @@ class App extends Component {
     render() {
         return (
             <div className="app wrapper">
+                <div className="background" style={{backgroundImage: `url(${this.state.backgroundImageURI})`}} />
                 <header>
                     <h1 className="title">Hoe warm is het vandaag?</h1>
                 </header>
