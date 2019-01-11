@@ -5,11 +5,9 @@ import './App.css';
 
 class App extends Component {
     state = {
-        main: {
-            temp: 0
-        },
         tempText: 'Op zoek naar de zon...',
         backgroundImageURI: '',
+        temperature: '',
     }
 
     componentDidMount() {
@@ -21,7 +19,8 @@ class App extends Component {
                 .then(res => {
                     const weather = res.data;
                     const temp = res.data.main.temp;
-                    this.setState(weather);
+
+                    this.setState({ temperature: Math.floor(temp) });
                     addWeather(temp);
                     addBackgroundPhoto(weather);
                 });
@@ -83,22 +82,17 @@ class App extends Component {
     render() {
         return (
             <div className="app wrapper">
-                <div className="background" style={{backgroundImage: `url(${this.state.backgroundImageURI})`}} />
+                <div className="background" style={{backgroundImage: `url(${this.state.backgroundImageURI})`, opacity: this.state.backgroundImageURI === '' ? 0 : 1}} />
                 <header>
                     <h1 className="title">Hoe warm is het vandaag?</h1>
                 </header>
                 <main>
-                    <p id="warmte">
+                    <div className="degree" style={{opacity: this.state.temperature === '' ? 0 : 1}}>{this.state.temperature}°</div>
+                    <p className="warmth">
                         { this.state.tempText }
                     </p>
                 </main>
                 <footer className="bottom">
-                    <div className="downloads">
-                        <div id="android">
-                            <a href="http://play.google.com/store/apps/details?id=com.phonegap.hoewarmishet" target="_blank">
-                            <img alt="Android app on Google Play" src="https://www.android.com/images/brand/android_app_on_play_logo_small.png" /></a>
-                        </div>
-                    </div>
                     <div className="social">
                         <div className="fb-page" data-href="https://www.facebook.com/hoewarmishetvandaag/" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
                             <div className="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/hoewarmishetvandaag/">
