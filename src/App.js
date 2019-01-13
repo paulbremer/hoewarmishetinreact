@@ -14,6 +14,9 @@ class App extends Component {
     componentWillMount() {
         const koud = document.domain.split('.nl')[0].indexOf('koud') !== -1;
         this.setState({ koud: koud });
+        if(koud) {
+            document.title = 'Hoe koud is het vandaag?';
+        }
     }
 
     componentDidMount() {
