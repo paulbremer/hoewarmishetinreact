@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Flickr from 'flickr-sdk';
+import ReactGA from 'react-ga';
 import './App.css';
 
 class App extends Component {
@@ -16,12 +17,17 @@ class App extends Component {
         this.setState({ koud: koud });
         if(koud) {
             document.title = 'Hoe koud is het vandaag?';
+            ReactGA.initialize('UA-27142281-1');
+        } else {
+            ReactGA.initialize('UA-27149822-1');
         }
     }
 
     componentDidMount() {
         const flickrApiKey = '4b82a5422b18968ea142a50cd9941398';
         const flickr =  Flickr(flickrApiKey);
+
+        ReactGA.pageview(window.location.pathname + window.location.search);
 
         const locationSuccess = (position) => {
             axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=b6907d289e10d714a6e88b30761fae22`)
