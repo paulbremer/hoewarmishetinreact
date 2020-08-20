@@ -25,12 +25,16 @@ class App extends Component {
 
     componentDidMount() {
         const flickrApiKey = '4b82a5422b18968ea142a50cd9941398';
+        const openWeatherMapKey = 'ffe86b6e47cf268d63772724c0935be2';
+        const openWeatherMapKey2 = '4e57540cea34dff11219ff74831a05e7';
         const flickr =  Flickr(flickrApiKey);
+
+        const openWeatherKeys = [openWeatherMapKey, openWeatherMapKey2];
 
         ReactGA.pageview(window.location.pathname + window.location.search);
 
         const locationSuccess = (position) => {
-            axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=b6907d289e10d714a6e88b30761fae22`)
+            axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${openWeatherKeys[Math.floor(Math.random() * 2)]}`)
                 .then(res => {
                     const weather = res.data;
                     const temp = res.data.main.temp;
@@ -38,6 +42,11 @@ class App extends Component {
                     this.setState({ temperature: Math.floor(temp) });
                     addWeather(temp);
                     addBackgroundPhoto(weather);
+                })
+                .catch(error => {
+                    // handle error
+                    console.log(error);
+                    this.setState({ tempText: 'Wij zijn de zon even kwijt...' });
                 });
         };
 
