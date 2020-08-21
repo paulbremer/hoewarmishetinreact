@@ -34,7 +34,7 @@ class App extends Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
 
         const locationSuccess = (position) => {
-            axios.get(`https://cors-anywhere.herokuapp.com/https://openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${openWeatherKeys[Math.floor(Math.random() * 2)]}`)
+            axios.get(`https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${openWeatherKeys[Math.floor(Math.random() * 2)]}&units=metric`)
                 .then(res => {
                     const weather = res.data;
                     const temp = res.data.main.temp;
