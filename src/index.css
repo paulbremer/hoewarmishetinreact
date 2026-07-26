@@ -1,14 +1,31 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import 'tailwindcss';
+
+:root {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #f2f2f2;
+  background: #0d9ed1 url('./img/bg.png') repeat;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 5px black;
 }
